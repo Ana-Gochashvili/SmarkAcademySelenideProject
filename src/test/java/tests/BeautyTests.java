@@ -1,5 +1,6 @@
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+package tests;
+
+import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 import steps.BeautyPageSteps;
 import utils.BaseAuth;
@@ -7,7 +8,7 @@ import utils.BaseAuth;
 public class BeautyTests extends BaseAuth {
     protected BeautyPageSteps beautyPageSteps;
 
-    @BeforeMethod
+    @BeforeMethod(description = "Opens Beauty page")
     public void goToCosmeticsAndHygieneProducts() {
         beautyPageSteps = mainPageSteps.goToBeautyPage();
     }

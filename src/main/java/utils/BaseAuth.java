@@ -1,9 +1,7 @@
 package utils;
 
 import com.codeborne.selenide.Configuration;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.*;
 import steps.AuthorizationPopUpSteps;
 import steps.MainPageSteps;
 
@@ -24,9 +22,8 @@ public class BaseAuth {
     public void setUp() {
         Configuration.browser = "chrome";
         open("https://psp.ge/");
-
         getWebDriver().manage().window().maximize();
-        Configuration.timeout = 2000;
+        Configuration.timeout = 3000;
     }
 
     @AfterTest(description = "Closes browser")

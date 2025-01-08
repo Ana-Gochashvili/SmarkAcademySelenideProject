@@ -1,3 +1,4 @@
+package tests;
 
 import com.codeborne.selenide.SelenideElement;
 import org.testng.annotations.Test;
@@ -6,7 +7,7 @@ import utils.BaseAuth;
 
 public class MainTests extends BaseAuth {
     @Test(description = "Check main page details")
-    public void check() {
+    public void checkMainPageDetails() {
         SoftAssert softAssert = new SoftAssert();
 
         softAssert.assertEquals(mainPageSteps.getBannersNumber(), 3, "Incorrect size!");
@@ -24,7 +25,6 @@ public class MainTests extends BaseAuth {
         mainPageSteps.goToBasket();
 
         authorizationPopUpSteps.checkAuthorizationPopUpTitle();
-
         softAssert.assertAll();
     }
 }

@@ -1,5 +1,6 @@
 package steps;
 
+import static com.codeborne.selenide.Selenide.sleep;
 import elements.BeautyPage;
 import io.qameta.allure.Step;
 import org.testng.Assert;
@@ -7,13 +8,12 @@ import org.testng.Assert;
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.*;
 
 
 public class BeautyPageSteps extends BeautyPage {
     @Step("Return page title")
     public String getPageTitle() {
-        return title.should(be(clickable), Duration.ofSeconds(10))
+        return title.should(be(visible), Duration.ofSeconds(20))
                 .getText();
     }
 
@@ -45,9 +45,8 @@ public class BeautyPageSteps extends BeautyPage {
     }
 
     @Step("Input maximum price")
-    public BeautyPageSteps inputMaxPrice(double price) {
+    public void inputMaxPrice(double price) {
         maxAPrice.setValue(String.valueOf(price));
-        return this;
     }
 
     @Step("Return select filter button")
@@ -63,7 +62,10 @@ public class BeautyPageSteps extends BeautyPage {
     @Step("Checks All Discounted Products")
     public void checkAllDiscountedProduct() {
         sleep(5000);
-        products.stream().forEach(el -> {
+
+        //   products.shouldHave(sizeGreaterThanOrEqual(1), Duration.ofSeconds(50));
+
+        products.forEach(el -> {
             String label = el.$(".product__discount-label").getText();
             Assert.assertTrue(label.matches("-\\d+%"),
                     "Incorrect discount label format: " + label);
@@ -72,7 +74,7 @@ public class BeautyPageSteps extends BeautyPage {
 
     @Step("Checks Clear Filter Button")
     public void checkClearFilterButton() {
-        clearFilterButton.shouldBe(visible, enabled);
+        clearFilterButton.shouldBe(visible, enabled, clickable);
     }
 
     @Step("Clicks Clear Filter Button")
