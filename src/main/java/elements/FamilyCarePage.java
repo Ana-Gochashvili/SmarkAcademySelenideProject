@@ -15,6 +15,8 @@ public class FamilyCarePage {
             numberOfItemValue = $x("//*[@id=\"app\"]/div[2]/div/div/div[3]/div[3]/div[1]/div[2]/ul/li[1]/div/button"),
             orderBy = $x("//*[@id=\"app\"]/div[2]/div/div/div[3]/div[3]/div[1]/div[2]/ul/li[2]/div/button");
 
-    protected ElementsCollection dropdownButtons = $$(".dropdown__button-arrow"),
-            numberOfItem = $$(".dropdown__item");
+    protected ElementsCollection
+            dropdownButtons = $$(".dropdown__button-arrow"),
+            numberOfItem = $$(".dropdown__item"),
+            products = $$(".product");
 }

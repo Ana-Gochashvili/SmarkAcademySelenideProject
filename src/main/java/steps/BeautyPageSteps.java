@@ -1,6 +1,7 @@
 package steps;
 
 import static com.codeborne.selenide.Selenide.sleep;
+
 import elements.BeautyPage;
 import io.qameta.allure.Step;
 import org.testng.Assert;
@@ -63,10 +64,8 @@ public class BeautyPageSteps extends BeautyPage {
     public void checkAllDiscountedProduct() {
         sleep(5000);
 
-        //   products.shouldHave(sizeGreaterThanOrEqual(1), Duration.ofSeconds(50));
-
         products.forEach(el -> {
-            String label = el.$(".product__discount-label").getText();
+            String label = el.$(".product__discount-label").scrollTo().getText();
             Assert.assertTrue(label.matches("-\\d+%"),
                     "Incorrect discount label format: " + label);
         });

@@ -23,7 +23,7 @@ public class BaseAuth {
         Configuration.browser = "chrome";
         open("https://psp.ge/");
         getWebDriver().manage().window().maximize();
-        Configuration.timeout = 3000;
+        Configuration.timeout = 5000;
     }
 
     @AfterTest(description = "Closes browser")

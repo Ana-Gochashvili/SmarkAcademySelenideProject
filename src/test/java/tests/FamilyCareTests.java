@@ -9,6 +9,7 @@ import utils.BaseAuth;
 
 public class FamilyCareTests extends BaseAuth {
     protected FamilyCarePageSteps familyCarePageSteps;
+
     @BeforeMethod(description = "Opens family Care page")
     public void goToCosmeticsAndHygieneProducts() {
         familyCarePageSteps = mainPageSteps.goToFamilyCarePage();
@@ -27,8 +28,13 @@ public class FamilyCareTests extends BaseAuth {
         familyCarePageSteps.clickNumberOfItemOnPageButton().selectNumberOfItemOnPage();
         softAssert.assertEquals(familyCarePageSteps.getNumberOfItemOnPage(), "40", "Incorrect number!");
 
-        familyCarePageSteps.clickOrderItemsByChoiceButton().selectOrderItemsByChoiceButton();
-        softAssert.assertEquals(familyCarePageSteps.getOrderItemsByText(), "ფასი კლებადობით", "Incorrect text!");
+        familyCarePageSteps.clickOrderItemsByChoiceButton().selectOrderItemsByPriceASC();
+        softAssert.assertEquals(familyCarePageSteps.getOrderItemsByText(), "ფასი ზრდადობით", "Incorrect text!");
+        softAssert.assertEquals(familyCarePageSteps.getFilteredProductSize(), 40, "Incorrect size!");
+        softAssert.assertEquals(familyCarePageSteps.getFilteredProductPrices().get(0), familyCarePageSteps.getFilteredMinimumPrice(familyCarePageSteps.getFilteredProductPrices()), "First filtered product should have minimum price!");
+
+        softAssert.assertEquals(familyCarePageSteps.getFilteredProductPrices().get(familyCarePageSteps.getFilteredProductPrices().size() - 1),
+                familyCarePageSteps.getFilteredMaximumPrice(familyCarePageSteps.getFilteredProductPrices()), "Last filtered product should have maximum price!");
         softAssert.assertAll();
     }
 }
