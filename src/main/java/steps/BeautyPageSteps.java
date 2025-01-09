@@ -10,7 +10,6 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 
-
 public class BeautyPageSteps extends BeautyPage {
     @Step("Return page title")
     public String getPageTitle() {
@@ -63,7 +62,6 @@ public class BeautyPageSteps extends BeautyPage {
     @Step("Checks All Discounted Products")
     public void checkAllDiscountedProduct() {
         sleep(5000);
-
         products.forEach(el -> {
             String label = el.$(".product__discount-label").scrollTo().getText();
             Assert.assertTrue(label.matches("-\\d+%"),
@@ -80,6 +78,4 @@ public class BeautyPageSteps extends BeautyPage {
     public void clickClearFilterButton() {
         clearFilterButton.click();
     }
-
-
 }
