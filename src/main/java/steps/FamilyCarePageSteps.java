@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 import static com.codeborne.selenide.CollectionCondition.*;
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selenide.sleep;
 
 public class FamilyCarePageSteps extends FamilyCarePage {
     @Step("Return page title")
@@ -87,7 +88,8 @@ public class FamilyCarePageSteps extends FamilyCarePage {
 
     @Step("Return Filtered Product Prices")
     public ArrayList<Double> getFilteredProductPrices() {
-        return products.shouldHave(sizeGreaterThanOrEqual(40), Duration.ofMinutes(1))
+        sleep(5000);
+        return products.shouldHave(sizeGreaterThanOrEqual(40), Duration.ofMinutes(2))
                 .stream()
                 .map(el -> {
                     String price = el.$(".product__price").scrollTo().getText();
@@ -97,22 +99,22 @@ public class FamilyCarePageSteps extends FamilyCarePage {
     }
 
     @Step("Return Filtered Products Minimum Price")
-    public double getFilteredMinimumPrice(List<Double> arrayList) {
-        double minNumber = arrayList.get(0);
-        for (double myNumber : arrayList) {
-            if (myNumber < minNumber)
-                minNumber = myNumber;
+    public double getFilteredMinimumPrice(List<Double> pricesList) {
+        double minPrice = pricesList.get(0);
+        for (double price : pricesList) {
+            if (price < minPrice)
+                minPrice = price;
         }
-        return minNumber;
+        return minPrice;
     }
 
     @Step("Return Filtered Products Maximum Price")
-    public double getFilteredMaximumPrice(List<Double> arrayList) {
-        double minNumber = arrayList.get(0);
-        for (double myNumber : arrayList) {
-            if (myNumber > minNumber)
-                minNumber = myNumber;
+    public double getFilteredMaximumPrice(List<Double> pricesList) {
+        double maxPrice = pricesList.get(0);
+        for (double price : pricesList) {
+            if (price > maxPrice)
+                maxPrice = price;
         }
-        return minNumber;
+        return maxPrice;
     }
 }
